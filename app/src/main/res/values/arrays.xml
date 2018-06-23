@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- These are the options displayed in the drop-down Spinner -->
+    <string-array name="array_inventory_options">
+        <item>@string/category_architecture</item>
+        <item>@string/category_art</item>
+        <item>@string/category_children_fiction</item>
+        <item>@string/category_computers</item>
+        <item>@string/category_education</item>
+        <item>@string/category_law</item>
+        <item>@string/category_literary_collections</item>
+        <item>@string/category_Mathematics</item>
+        <item>@string/category_medical</item>
+        <item>@string/category_music</item>
+        <item>@string/category_philosophy</item>
+        <item>@string/category_psychology</item>
+        <item>@string/category_science</item>
+        <item>@string/category_unknown</item>
+    </string-array>
+</resources>
