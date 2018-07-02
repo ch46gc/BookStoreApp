@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">BookStoreApp</string>
+    <!--Name of the application [CHAR LIMIT=12]-->
+    <string name="app_name">Books</string>
     <!-- Label for overflow menu option that inserts  book data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <!-- Label for overflow menu option that deletes all books data in the app [CHAR LIMIT=20] -->
@@ -22,39 +23,91 @@
     <string name="category_supplier_name">Supplier Name</string>
     <!-- Label for price information in the editor [CHAR LIMIT=30] -->
    <string name="category_price">Price</string>
+
     <string name="product_name">Android SQLite Essentials</string>
     <string name="supplier_name">Half Price Books</string>
-    <string name="book_price">25</string>
+    <string name="book_price">$25</string>
     <!--Text hint for phone number in the editor [CHAR LIMIT=12]-->
-    <string name="supplier_phone">2222228888</string>
+    <string name="supplier_phone">(859)283–0546</string>
+    <string name="quantity">Qty \n 1</string>
 
 <!--Hints for editText-->
     <!-- Text hint for product name field in the editor [CHAR LIMIT=30] -->
     <string name="edit_text_product_name">Book Title</string>
     <!-- Text hint for quantity field in the editor [CHAR LIMIT=5] -->
-    <string name="edit_text_quantity">2</string>
+    <string name="edit_text_quantity">Qty \n 2</string>
     <!-- Text hint for quantity field in the editor [CHAR LIMIT=30] -->
     <string name="edit_text_inventory">Category</string>
     <!--Text hint for price field in the editor [CHAR LIMIT=10]-->
-    <string name="edit_text_price">10</string>
+    <string name="edit_text_price">$10</string>
     <!--Text hint for phone number in the editor [CHAR LIMIT=12]-->
-    <string name="edit_text_phone_number">222 222 8888</string>
+    <string name="edit_text_phone_number">(859)283–0546</string>
     <!--Text hint for supplier name in the editor[CHAR LIMIT=30]-->
     <string name="edit_text_supplier_name">Name of supplier</string>
-    <!--Category for books in the drop down menu option [CHAR LIMIT=20]-->
+
+    <!--Category for books in the drop down menu option "Architecture"[CHAR LIMIT=20]-->
     <string name="category_architecture">Architecture</string>
+    <!--Category for books in the drop down menu option "Art"[CHAR LIMIT=20]-->
     <string name="category_art">Art</string>
+    <!--Category for books in the drop down menu option "Children's Fiction"[CHAR LIMIT=20]-->
     <string name="category_children_fiction">Children\'s Fiction</string>
+    <!--Category for books in the drop down menu option "Computers"[CHAR LIMIT=20]-->
     <string name="category_computers">Computers</string>
+    <!--Category for books in the drop down menu option "Education"[CHAR LIMIT=20]-->
     <string name="category_education">Education</string>
+    <!--Category for books in the drop down menu option "Literary Collections"[CHAR LIMIT=20]-->
     <string name="category_literary_collections">Literary Collections</string>
+    <!--Category for books in the drop down menu option "Medical" [CHAR LIMIT=20]-->
     <string name="category_medical">Medical</string>
+    <!--Category for books in the drop down menu option "Law"[CHAR LIMIT=20]-->
     <string name="category_law">Law</string>
+    <!--Category for books in the drop down menu option "Philosophy" [CHAR LIMIT=20]-->
     <string name="category_philosophy">Philosophy</string>
+    <!--Category for books in the drop down menu option "Science"[CHAR LIMIT=20]-->
     <string name="category_science">Science</string>
+    <!--Category for books in the drop down menu option "Psychology"[CHAR LIMIT=20]-->
     <string name="category_psychology">Psychology</string>
+    <!--Category for books in the drop down menu option "Music" [CHAR LIMIT=20]-->
     <string name="category_music">Music</string>
+    <!--Category for books in the drop down menu option "Mathematics"[CHAR LIMIT=20]-->
     <string name="category_Mathematics">Mathematics</string>
+    <!--Category for books in the drop down menu option "Unknown"[CHAR LIMIT=20]-->
     <string name="category_unknown">Unknown</string>
+
     <string name="display_set_text">The books table contains: </string>
+
+    <!-- Title text for the empty view, which describes the empty image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">It\'s a little empty here…</string>
+    <!-- Subtitle text for the empty view that prompts the user to add a book [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a book</string>
+    <!--Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE}-->
+    <string name="unsaved_changes_dialog_message">Discard your changes and quit editing?</string>
+    <!--Dialog button text for the button text option to discard a user's changes [CHAR LIMIT=20]-->
+    <string name="discard">Discard</string>
+    <!-- Toast message in editor when new book has been successfully inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_book_successful">Book saved</string>
+    <!-- Toast message in editor when new book  has failed to be inserted [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_book_failed">Error with saving book</string>
+    <!-- Title for the activity to edit an existing book [CHAR LIMIT= 20]-->
+    <string name="editor_activity_title_edit_book">Edit Book</string>
+    <!-- Toast message in editor when current book was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_book_successful">Book updated</string>
+    <!--Toast message in editor when current book failed to update [Char LIMIT=NONE]-->
+    <string name="editor_update_book_failed">Error with updating book</string>
+    <!--Dialog button text for the option to keep editing the current book [CHAR LIMIT=20]-->
+    <string name="keep_editing">Keep Editing</string>
+    <!--Toast message in editor when current book was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_successful">Book deleted</string>
+    <!--Toast message in editor when current book has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_failed">Error with deleting book</string>
+    <!--Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT= NONE]-->
+    <string name="delete_dialog_message">Delete this book?</string>
+
+    <!--Dialog button text for the option to confirm deleting the current book [CHAR LIMIT=20]-->
+    <string name="delete">Delete</string>
+    <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+    <string name="unknown_inventory">Category Unknown</string>
+
+    <string name="add_book">add book</string>
 </resources>

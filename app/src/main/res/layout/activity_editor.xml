@@ -111,7 +111,7 @@
                 android:ems="10"
                 android:hint="@string/edit_text_price"
                 android:inputType="number"
-                tools:text="10" />
+                tools:text="$10" />
         </LinearLayout>
 
         <LinearLayout
