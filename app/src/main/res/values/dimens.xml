@@ -10,4 +10,23 @@
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="content_padding">10dp</dimen>
     <dimen name="margin">8dp</dimen>
+    <!--Layout width for editor LinearLayout-->
+    <dimen name="editor_layout_width">0dp</dimen>
+    <dimen name="name_txt_vw_margin">8dp</dimen>
+    <!--Layout List items -->
+    <dimen name="list_item_price_width">37dp</dimen>
+    <dimen name="list_item_height">19dp</dimen>
+    <dimen name="price_margin">8dp</dimen>
+    <dimen name="price_margin_top">16dp</dimen>
+    <dimen name="quantity_list_item_width">46dp</dimen>
+    <dimen name="quantity_list_item_height">36dp</dimen>
+    <dimen name="quantity_margin">8dp</dimen>
+    <dimen name="quantity_margin_top">16dp</dimen>
+    <dimen name="add_book_icon_width">43dp</dimen>
+    <dimen name="add_book_icon_height">26dp</dimen>
+    <dimen name="add_book_icon_margin">8dp</dimen>
+    <dimen name="empty_title_text_padding_top">16dp</dimen>
+    <dimen name="empty_subtitle_padding_top">8dp</dimen>
+    <dimen name="fab_elevation">4dp</dimen>
+
 </resources>

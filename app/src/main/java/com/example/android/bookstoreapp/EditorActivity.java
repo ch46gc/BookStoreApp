@@ -170,6 +170,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         mInventory = BookEntry.INVENTORY_UNKNOWN; // Unknown
 
                     }
+
                 }
             }
 
@@ -192,7 +193,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String priceString = mPriceEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
         String phoneNumber = mPhoneNumberEditText.getText().toString().trim();
-
         // Check if
         // this is supposed to be a new book
         // and check if all the fields in the editor are blank
@@ -377,14 +377,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String price = cursor.getString(priceColumnIndex);
-            int quantity = cursor.getInt(quantityColumnIndex);
+            String quantity = cursor.getString(quantityColumnIndex);
             int inventory = cursor.getInt(inventoryColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             String phoneNumber = cursor.getString(phoneNumberColumnIndex);
             // Update the views on the screen with the values from the database
             mProductNameEditText.setText(name);
-            mPriceEditText.setText(price);
-            mQuantityEditText.setText(Integer.toString(quantity));
+            mPriceEditText.setText(String.format("$%s", price));
+            mQuantityEditText.setText(quantity);
             mSupplierNameEditText.setText(supplierName);
             mPhoneNumberEditText.setText(phoneNumber);
             // Inventory is a dropdown spinner, so map the constant value from the database
@@ -530,6 +530,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         finish();
     }
 }
+
+
 
 
 

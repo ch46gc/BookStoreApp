@@ -26,10 +26,10 @@
 
     <string name="product_name">Android SQLite Essentials</string>
     <string name="supplier_name">Half Price Books</string>
-    <string name="book_price">$25</string>
+    <string name="book_price">25</string>
     <!--Text hint for phone number in the editor [CHAR LIMIT=12]-->
     <string name="supplier_phone">(859)283–0546</string>
-    <string name="quantity">Qty \n 1</string>
+    <string name="quantity"> \n 1</string>
 
 <!--Hints for editText-->
     <!-- Text hint for product name field in the editor [CHAR LIMIT=30] -->
@@ -110,4 +110,6 @@
     <string name="unknown_inventory">Category Unknown</string>
 
     <string name="add_book">add book</string>
+
+
 </resources>

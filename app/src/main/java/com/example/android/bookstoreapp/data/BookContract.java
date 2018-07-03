@@ -8,8 +8,7 @@ public final class BookContract {
     // This will prevent someone from accidentally instantiating the contract class,
     //giving it an empty constructor.
     private BookContract() {
-
-    }
+        }
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
      * relationship between a domain name and its website.  A convenient string to use for the
@@ -27,7 +26,6 @@ public final class BookContract {
      * For instance, content://com.example.android.bookstoreapp/books/ is a valid path for
      * looking at book data. content://com.example.android.bookstoreapp/shipment/ will fail,
      * as the ContentProvider hasn't been given any information on what to do with "shipment".
-     *
      */
     public static final String PATH_BOOKS = "books";
     /**
@@ -45,7 +43,9 @@ public final class BookContract {
          */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
-        /** The content URI to access the book data in the provider */
+        /**
+         * The content URI to access the book data in the provider
+         */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_BOOKS);
         /**
          * Name of database table for books
@@ -90,10 +90,9 @@ public final class BookContract {
         /**
          * Phone number for the supplier.
          * <p>
-         *  Type:INTEGER
+         * Type:INTEGER
          */
         public static final String COLUMN_BOOK_PHONE_NUMBER = "phoneNumber";
-
         /**
          * Possible values for the inventory of the book
          */
@@ -111,10 +110,8 @@ public final class BookContract {
         public static final int INVENTORY_PSYCHOLOGY = 11;
         public static final int INVENTORY_MUSIC = 12;
         public static final int INVENTORY_MATHEMATICS = 13;
-
         /**
-         *
-         * @param inventory  for the book
+         * @param inventory for the book
          * @return whether or not the given inventory is {@link #INVENTORY_UNKNOWN},
          * {@link #INVENTORY_ARCHITECTURE}, {@link #INVENTORY_ART},
          * {@link #INVENTORY_CHILDREN_FICTION}, {@link #INVENTORY_COMPUTERS},
@@ -123,19 +120,18 @@ public final class BookContract {
          * {@link #INVENTORY_SCIENCE}, {@link #INVENTORY_SCIENCE}, {@link #INVENTORY_PSYCHOLOGY},
          * {@link #INVENTORY_MUSIC}, {@link #INVENTORY_MATHEMATICS}
          */
-    public static boolean isValidInventory(int inventory) {
-        if (inventory == INVENTORY_UNKNOWN || inventory == INVENTORY_ARCHITECTURE || inventory == INVENTORY_ART
-                || inventory == INVENTORY_CHILDREN_FICTION || inventory == INVENTORY_COMPUTERS ||
-                inventory == INVENTORY_EDUCATION || inventory == INVENTORY_LITERARY_COLLECTIONS ||
-                inventory == INVENTORY_MEDICAL || inventory == INVENTORY_LAW || inventory ==
-                INVENTORY_PHILOSOPHY || inventory == INVENTORY_SCIENCE || inventory == INVENTORY_PSYCHOLOGY
-                || inventory == INVENTORY_MUSIC || inventory == INVENTORY_MATHEMATICS) {
-            return true;
-        } else {
-            return false;
-
+        public static boolean isValidInventory(int inventory) {
+            if (inventory == INVENTORY_UNKNOWN || inventory == INVENTORY_ARCHITECTURE || inventory == INVENTORY_ART
+                    || inventory == INVENTORY_CHILDREN_FICTION || inventory == INVENTORY_COMPUTERS ||
+                    inventory == INVENTORY_EDUCATION || inventory == INVENTORY_LITERARY_COLLECTIONS ||
+                    inventory == INVENTORY_MEDICAL || inventory == INVENTORY_LAW || inventory ==
+                    INVENTORY_PHILOSOPHY || inventory == INVENTORY_SCIENCE || inventory == INVENTORY_PSYCHOLOGY
+                    || inventory == INVENTORY_MUSIC || inventory == INVENTORY_MATHEMATICS) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
     }
 }
 

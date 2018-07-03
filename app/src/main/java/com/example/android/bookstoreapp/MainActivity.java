@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String TAG = MainActivity.class.getSimpleName();
     /**
      * Identifier for book loader data
      */
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 startActivity(intent);
-
+                Log.e(TAG, "Inside OnCreate Method");
+                Log.i(TAG, "Inside Oncreate Method");
+                Log.d(TAG, "Inside Oncreate Method");
             }
         });
 
@@ -71,11 +74,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(intent);
 
             }
-            });
+        });
 
         //Kick off the loader
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_main.xml file.
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     public void insertData() {
         //Create a ContentValues object where the column names are the keys,
         //and book's attributes are the values.
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
         Log.v("MainActivity", "New book has been saved " + newUri);
     }
+
     private void deleteAllBooks() {
         int rowsDeleted = getContentResolver().delete(BookEntry.CONTENT_URI, null, null);
         Log.v("MainActivity", rowsDeleted + "rows deleted from book database");
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         //Define  a projection that specifies the columns from the table we care about.
-        String[]projection = {
+        String[] projection = {
                 BookEntry._ID,
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_PRICE,
@@ -139,11 +145,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return new CursorLoader(this,  //Parent activity context
                 BookEntry.CONTENT_URI, //Parent content URI to query
                 projection,           // Columns to include in the resulting Cursor
-                null,                 // No selection clause
-                null,                 // No selection arguments
+                null,        // No selection clause
+                null,     // No selection arguments
                 null);
     }
-
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Update {@link BookCursorAdapter} with this new cursor containing updated book data
@@ -156,5 +161,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mCursorAdapter.swapCursor(null);
     }
 }
-
 

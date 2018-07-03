@@ -21,15 +21,18 @@ import java.util.Objects;
 /**
  * {@link ContentProvider} for Books app.
  */
-public class BookProvider  extends ContentProvider {
+public class BookProvider extends ContentProvider {
     /**
      * Tag for the log message
      */
     public static final String LOG_TAG = BookProvider.class.getSimpleName();
-    /** URI matcher code for the content URI for the books table */
+    /**
+     * URI matcher code for the content URI for the books table
+     */
     private static final int BOOKS = 200;
-
-    /** URI matcher code for the content URI for a single book in the books table */
+    /**
+     * URI matcher code for the content URI for a single book in the books table
+     */
     private static final int BOOK_ID = 201;
 
     /**
@@ -68,51 +71,48 @@ public class BookProvider  extends ContentProvider {
         // Creates and initializes a BookDbHelper object to gain access to the books database.
         mDbHelper = new BookDbHelper(getContext());
         return true;
-
+        }
+        @TargetApi(Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
+        // Get readable database
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        // This cursor will hold the result of the query
+        Cursor cursor;
+        // Figure out if the URI matcher can match the URI to a specific code
+        int match = sUriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                // For the BOOKS code, query the books table directly with the given
+                // projection, selection, selection arguments, and sort order. The cursor
+                // could contain multiple rows of the books table.
+                cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, sortOrder);
+                break;
+            case BOOK_ID:
+                // For the BOOK_ID code, extract out the ID from the URI.
+                // For an example URI such as "content://com.example.android.bookstoreapp/books/3",
+                // the selection will be "_id=?" and the selection argument will be a
+                // String array containing the actual ID of 3 in this case.
+                //
+                // For every "?" in the selection, we need to have an element in the selection
+                // arguments that will fill in the "?". Since we have 1 question mark in the
+                // selection, we have 1 String in the selection arguments' String array.
+                selection = BookEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                // This will perform a query on the books table where the _id equals 3 to return a
+                // Cursor containing that row of the table.
+                cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, sortOrder);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+        }
+        cursor.setNotificationUri(Objects.requireNonNull(getContext()).getContentResolver(), uri);
+        return cursor;
     }
-  @TargetApi(Build.VERSION_CODES.KITKAT)
-  @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-  @Override
-  public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
-                      String sortOrder) {
-      // Get readable database
-      SQLiteDatabase database = mDbHelper.getReadableDatabase();
-
-      // This cursor will hold the result of the query
-      Cursor cursor;
-      // Figure out if the URI matcher can match the URI to a specific code
-      int match = sUriMatcher.match(uri);
-      switch (match) {
-          case BOOKS:
-              // For the BOOKS code, query the books table directly with the given
-              // projection, selection, selection arguments, and sort order. The cursor
-              // could contain multiple rows of the books table.
-              cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs,
-                      null, null, sortOrder);
-              break;
-          case BOOK_ID:
-              // For the BOOK_ID code, extract out the ID from the URI.
-              // For an example URI such as "content://com.example.android.bookstoreapp/books/3",
-              // the selection will be "_id=?" and the selection argument will be a
-              // String array containing the actual ID of 3 in this case.
-              //
-              // For every "?" in the selection, we need to have an element in the selection
-              // arguments that will fill in the "?". Since we have 1 question mark in the
-              // selection, we have 1 String in the selection arguments' String array.
-              selection = BookEntry._ID + "=?";
-              selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-              // This will perform a query on the books table where the _id equals 3 to return a
-              // Cursor containing that row of the table.
-              cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs,
-                      null, null, sortOrder);
-              break;
-          default:
-              throw new IllegalArgumentException("Cannot query unknown URI " + uri);
-      }
-      cursor.setNotificationUri(Objects.requireNonNull(getContext()).getContentResolver(), uri);
-      return cursor;
-  }
-
     /**
      * Insert new data into the provider with the given ContentValues.
      */
@@ -128,7 +128,6 @@ public class BookProvider  extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
-
     /**
      * Insert a book into the database with the given content values. Return the new content URI
      * for that specific row in the database.
@@ -150,19 +149,17 @@ public class BookProvider  extends ContentProvider {
         if (quantity == null) {
             throw new IllegalArgumentException("Book requires valid quantity");
         }
-        Integer inventory =values.getAsInteger(BookEntry.COLUMN_BOOK_INVENTORY);
-        if (inventory == null || !BookEntry.isValidInventory(inventory)){
+        Integer inventory = values.getAsInteger(BookEntry.COLUMN_BOOK_INVENTORY);
+        if (inventory == null || !BookEntry.isValidInventory(inventory)) {
             throw new IllegalArgumentException("Book requires inventory");
         }
         /*
          *Supplier name is not required, any value is valid( including null)
          */
         String phoneNumber = values.getAsString(BookEntry.COLUMN_BOOK_PHONE_NUMBER);
-        if (phoneNumber == null){
+        if (phoneNumber == null) {
             throw new IllegalArgumentException("Book requires a valid phone number");
-
         }
-
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         // Insert the new book with the given values
@@ -189,7 +186,6 @@ public class BookProvider  extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
-
                 return updateBook(uri, contentValues, selection, selectionArgs);
             case BOOK_ID:
                 // For the BOOK_ID code, extract out the ID from the URI,
@@ -201,7 +197,7 @@ public class BookProvider  extends ContentProvider {
                 return updateBook(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
-    }
+        }
     }
     /**
      * Update books in the database with the given content values. Apply the changes to the rows
@@ -301,7 +297,7 @@ public class BookProvider  extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 // For case PET_ID:
                 rowsDeleted = database.delete(BookEntry.TABLE_NAME, selection, selectionArgs);
-               break;
+                break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
@@ -317,7 +313,7 @@ public class BookProvider  extends ContentProvider {
      * Returns the MIME type of data for the content URI.
      */
     @Override
-    public String getType (@NonNull Uri uri){
+    public String getType(@NonNull Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
@@ -328,7 +324,5 @@ public class BookProvider  extends ContentProvider {
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
     }
-
-
 }
 
