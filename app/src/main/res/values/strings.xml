@@ -23,15 +23,13 @@
     <string name="category_supplier_name">Supplier Name</string>
     <!-- Label for price information in the editor [CHAR LIMIT=30] -->
    <string name="category_price">Price</string>
-
     <string name="product_name">Android SQLite Essentials</string>
     <string name="supplier_name">Half Price Books</string>
     <string name="book_price">25</string>
     <!--Text hint for phone number in the editor [CHAR LIMIT=12]-->
     <string name="supplier_phone">(859)283–0546</string>
     <string name="quantity"> \n 1</string>
-
-<!--Hints for editText-->
+    <!--Hints for editText-->
     <!-- Text hint for product name field in the editor [CHAR LIMIT=30] -->
     <string name="edit_text_product_name">Book Title</string>
     <!-- Text hint for quantity field in the editor [CHAR LIMIT=5] -->
@@ -73,9 +71,7 @@
     <string name="category_Mathematics">Mathematics</string>
     <!--Category for books in the drop down menu option "Unknown"[CHAR LIMIT=20]-->
     <string name="category_unknown">Unknown</string>
-
     <string name="display_set_text">The books table contains: </string>
-
     <!-- Title text for the empty view, which describes the empty image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">It\'s a little empty here…</string>
     <!-- Subtitle text for the empty view that prompts the user to add a book [CHAR LIMIT=50] -->
@@ -102,14 +98,20 @@
     <string name="editor_delete_book_failed">Error with deleting book</string>
     <!--Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT= NONE]-->
     <string name="delete_dialog_message">Delete this book?</string>
-
     <!--Dialog button text for the option to confirm deleting the current book [CHAR LIMIT=20]-->
     <string name="delete">Delete</string>
     <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
     <string name="unknown_inventory">Category Unknown</string>
-
     <string name="add_book">add book</string>
-
-
+    <string name="quantity_required">Quantity is required!</string>
+    <string name="quantity_warning">Quantity can\'t be less 0.</string>
+    <string name="field_required">All fields required!</string>
+    <string name="name_required">Name is required!</string>
+    <string name="price_required">Price is required!</string>
+    <string name="quantity_required_edit">Quantity field requires a number.</string>
+    <string name="supplier_name_required">Supplier name is required.</string>
+    <string name="phone_number_required">Phone number is required !</string>
+    <string name="minus">-</string>
+    <string name="addition">+</string>
 </resources>

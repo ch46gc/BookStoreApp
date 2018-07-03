@@ -56,12 +56,7 @@ public final class BookContract {
          * <p>
          * Type:INTEGER
          */
-        public final static String _ID = BaseColumns._ID;
-        /**
-         * Name of the book.
-         * <p>
-         * Type:TEXT
-         */
+
         public final static String COLUMN_BOOK_NAME = "productName";
         /**
          * Product price of the book.

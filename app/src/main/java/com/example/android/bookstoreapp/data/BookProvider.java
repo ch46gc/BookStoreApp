@@ -160,7 +160,7 @@ public class BookProvider extends ContentProvider {
         if (phoneNumber == null) {
             throw new IllegalArgumentException("Book requires a valid phone number");
         }
-        // Get writeable database
+        // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         // Insert the new book with the given values
         long id = database.insert(BookEntry.TABLE_NAME, null, values);

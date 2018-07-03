@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,12 +63,28 @@
                 style="@style/CategoryStyle"
                 android:text="@string/category_quantity" />
             <!--Input field -->
+            <ImageButton
+                android:id="@+id/minus_button"
+                android:layout_width="@dimen/editor_layout_width"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_remove"
+                android:text="@string/minus" />
+
             <EditText
                 android:id="@+id/edit_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/edit_text_quantity"
                 android:inputType="number" />
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="@dimen/editor_layout_width"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_add"
+                android:text="@string/addition" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,7 +129,7 @@
                 android:ems="10"
                 android:hint="@string/edit_text_price"
                 android:inputType="number"
-                tools:text="$10" />
+                tools:text=" $25" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +154,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingEnd="@dimen/padding_2"
@@ -154,6 +171,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/edit_text_phone_number"
                 android:inputType="phone" />
+
+            <ImageButton
+                android:id="@+id/call"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_call" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -70,6 +71,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * {@link BookEntry#INVENTORY_MATHEMATICS}, or {@link BookEntry#INVENTORY_UNKNOWN}.
      */
     private int mInventory = BookEntry.INVENTORY_UNKNOWN;
+    /**
+     * int for quantity check
+     */
+    private int givenQuantity;
+    ImageButton mAddition;
+    ImageButton mSubtraction;
     private boolean mBookHasChanged = false;
     //OnTouchListener that will listen for any users touches on a View, this will imply that they
     //are modifying the view, and change the mBookHasChanged boolean to true.
@@ -100,7 +107,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         } else {
             //Otherwise this is an existing book, so change app bar to say " Edit Book"
             setTitle(getString(R.string.editor_activity_title_edit_book));
-            //Intialize a loader to read the book data from database
+            //Initialize a loader to read the book data from database
             // and display the current values in the editor
             getLoaderManager().initLoader(EXISTING_BOOK_LOADER, null, this);
         }
@@ -111,12 +118,62 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSupplierNameEditText = findViewById(R.id.edit_supplier_name);
         mPhoneNumberEditText = findViewById(R.id.edit_phone_number);
         mInventorySpinner = findViewById(R.id.spinner);
+        /* Button for increasing quantity */
+        mAddition = findViewById(R.id.add_button);
+        /* Button for decreasing quantity  */
+        mSubtraction = findViewById(R.id.minus_button);
         mProductNameEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
         mPhoneNumberEditText.setOnTouchListener(mTouchListener);
         mInventorySpinner.setOnTouchListener(mTouchListener);
+        mAddition.setOnTouchListener(mTouchListener);
+        mSubtraction.setOnTouchListener(mTouchListener);
+        //increase quantity
+        mAddition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = mQuantityEditText.getText().toString();
+                if (TextUtils.isEmpty(quantity)) {
+                    Toast.makeText(EditorActivity.this, R.string.quantity_required, Toast.LENGTH_SHORT).show();
+                    } else {
+                    givenQuantity = Integer.parseInt(quantity);
+                    mQuantityEditText.setText(String.valueOf(givenQuantity + 1));
+                }
+
+            }
+        });
+        //decrease quantity
+        mSubtraction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = mQuantityEditText.getText().toString();
+                if (TextUtils.isEmpty(quantity)) {
+                    Toast.makeText(EditorActivity.this, R.string.quantity_required, Toast.LENGTH_SHORT).show();
+                    } else {
+                    givenQuantity = Integer.parseInt(quantity);
+                    //To validate if quantity is greater than 0
+                    if ((givenQuantity - 1) >= 0) {
+                        mQuantityEditText.setText(String.valueOf(givenQuantity - 1));
+                    } else {
+                        Toast.makeText(EditorActivity.this, R.string.quantity_warning, Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+        /* Button for phone call  */
+        ImageButton mPhone = findViewById(R.id.call);
+        //button for phone call
+        mPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String PhoneNumber = mPhoneNumberEditText.getText().toString().trim();
+                phoneOrder(PhoneNumber);
+
+            }
+        });
         setupSpinner();
 
     }
@@ -196,10 +253,31 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Check if
         // this is supposed to be a new book
         // and check if all the fields in the editor are blank
-        if (mCurrentBookUri == null && TextUtils.isEmpty(productNameString) && TextUtils.isEmpty(quantityString)
-                && TextUtils.isEmpty(priceString) && TextUtils.isEmpty(supplierNameString) &&
-                TextUtils.isEmpty(supplierNameString) && TextUtils.isEmpty(phoneNumber)
-                && mInventory == BookEntry.INVENTORY_UNKNOWN) {
+        if (mCurrentBookUri == null && TextUtils.isEmpty(productNameString) || TextUtils.isEmpty(quantityString)
+                || TextUtils.isEmpty(priceString) || TextUtils.isEmpty(supplierNameString) ||
+                TextUtils.isEmpty(supplierNameString) || TextUtils.isEmpty(phoneNumber)
+                || mInventory == BookEntry.INVENTORY_UNKNOWN) {
+            Toast.makeText(this, getString(R.string.field_required),
+                    Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(productNameString)) {
+                mProductNameEditText.setError(getString(R.string.name_required));
+                return;
+            }
+            else if (TextUtils.isEmpty(priceString)) {
+                mPriceEditText.setError(getString(R.string.price_required));
+                return;
+            }
+           else if(TextUtils.isEmpty(quantityString)) {
+            mQuantityEditText.setError(getString(R.string.quantity_required_edit));
+            return;
+            }
+            else if(TextUtils.isEmpty(supplierNameString)) {
+            mSupplierNameEditText.setError(getString(R.string.supplier_name_required));
+            return;
+            }
+            else if(TextUtils.isEmpty(phoneNumber)) {
+            mPhoneNumberEditText.setError(getString(R.string.phone_number_required));
             //No fields were modified, we return early without creating a new book.
             //No Need to create ContentValues or do any ContentProvider operations.
             return;
@@ -529,8 +607,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Close the activity
         finish();
     }
-}
+    /**
+     * Call book's supplier
+     *
+     * @param phoneNumber - supplier's phone number
+     */
+    private void phoneOrder(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
+}
 
 
 
